@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Before You Buy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1>Before You Buy</h1>
+      <p class="tagline">A Gold Coast address checker: zoning, flood risk, overlays and real growth, in plain English.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card search-card">
+      <form id="search-form" autocomplete="off">
+        <label for="address">Gold Coast street address</label>
+        <div class="search-row">
+          <div class="input-wrap">
+            <input id="address" type="text" placeholder="e.g. 12 Bon Aire Court, Clear Island Waters" required>
+            <ul id="suggestions" class="suggestions" hidden></ul>
+          </div>
+          <button type="submit" id="go">Check address</button>
+        </div>
+        <p class="hint">Try: <a href="#" data-try="12 Bon Aire Court, Clear Island Waters">12 Bon Aire Court, Clear Island Waters</a> ·
+          <a href="#" data-try="46 Cavill Avenue, Surfers Paradise">46 Cavill Avenue, Surfers Paradise</a> ·
+          <a href="#" data-try="4 Lakeview Drive, Nerang">4 Lakeview Drive, Nerang</a></p>
+      </form>
+      <p id="status" class="status" role="status"></p>
+    </section>
+
+    <section id="results" hidden>
+      <div class="card headline">
+        <div>
+          <p class="eyebrow">Property</p>
+          <h2 id="r-address"></h2>
+          <p id="r-meta" class="muted"></p>
+        </div>
+        <div id="map"></div>
+      </div>
+
+      <div class="card">
+        <h3>The plain-English summary</h3>
+        <ul id="r-summary" class="summary"></ul>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>1. Zoning <span class="src live">Live council data</span></h3>
+          <div id="r-zone"></div>
+        </div>
+        <div class="card">
+          <h3>2. Flood risk <span class="src live">Live council data</span></h3>
+          <div id="r-flood"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>3. Other overlays on this lot <span class="src live">Live council data</span></h3>
+        <p class="muted">Overlays are extra rules on top of the zone. They can limit what you can build, add costs, or flag a hazard.</p>
+        <div id="r-overlays"></div>
+      </div>
+
+      <div class="card">
+        <h3>4. Suburb growth history <span id="growth-src" class="src"></span></h3>
+        <div id="r-growth"></div>
+        <details class="own-figures">
+          <summary>Use your own real figures</summary>
+          <p class="muted">Look up the suburb's median price for two years (for example from QGSO, PropTrack, CoreLogic or a realestate.com.au suburb profile) and enter them here.</p>
+          <form id="own-form" class="own-grid">
+            <label>Start year <input type="number" id="own-y1" min="1970" max="2026" required></label>
+            <label>Start median ($) <input type="number" id="own-p1" min="1" required></label>
+            <label>End year <input type="number" id="own-y2" min="1971" max="2026" required></label>
+            <label>End median ($) <input type="number" id="own-p2" min="1" required></label>
+            <button type="submit">Recalculate</button>
+          </form>
+        </details>
+      </div>
+
+      <div class="card">
+        <h3>5. Does it really double every 7–10 years?</h3>
+        <div id="r-myth"></div>
+        <div id="r-chart"></div>
+      </div>
+    </section>
+
+    <section class="card disclaimer">
+      <h3>Important</h3>
+      <p><strong>This is not financial, legal or planning advice.</strong> It is a starting point to help you ask better questions. Council data can be out of date, simplified or wrong for a specific lot, and the City Plan is updated regularly.</p>
+      <p>Before you sign anything, check the official <a href="https://www.goldcoast.qld.gov.au/Planning-building" target="_blank" rel="noopener">City of Gold Coast City Plan and interactive mapping</a>, get a property and flood search, and talk to a conveyancer or solicitor.</p>
+      <p class="muted small">Data: City of Gold Coast open data (CC BY), served from the council's ArcGIS layers: City Plan Version 11 open data, property addresses, cadastre, suburbs, designated flood levels and flood insurance event mapping. Map tiles © OpenStreetMap contributors.</p>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="growth-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
